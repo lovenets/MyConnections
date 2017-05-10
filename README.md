@@ -64,7 +64,7 @@ It is an simple orm,an it is easy to use,it supports mysql,sqlserver,sqlite
       p.Id =1;
       conn.Update(p) //update ... where Id=@id
       
-      conn.Delete(1) //delete by id
+      conn.Delete&lt;peopleT&gt;(1) //delete by id
       
       peopleT p = conn.GetById&lt;peopleT&gt;(1); //get by id
       
