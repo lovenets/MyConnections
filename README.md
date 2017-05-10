@@ -94,3 +94,5 @@ It is an simple orm,an it is easy to use,it supports mysql,sqlserver,sqlite
 </pre>
 
 Download  https://github.com/znyet/MyConnections/releases
+<br>
+I have provide an codesmith template to help you generate code
