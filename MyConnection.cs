@@ -51,6 +51,15 @@ namespace MyConnections
         #region common method
 
         /// <summary>
+        /// ChangeDatabase
+        /// </summary>
+        /// <param name="name"></param>
+        public void ChangeDatabase(string name)
+        {
+            conn.ChangeDatabase(name);
+        }
+
+        /// <summary>
         /// 开始事物
         /// </summary>
         public void BeginTran()
