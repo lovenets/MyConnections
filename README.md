@@ -70,7 +70,7 @@ It is an simple orm,an it is easy to use,it supports mysql,sqlserver,sqlite
       
       //More Method
       InsertMany，InsertKeyIfExistUpdate，InsertIdentity，Update，UpdateByWhere，DeleteByIds，DeleteAll，GetAll
-      GetByWhere，GetByWhereFirst，GetCount，GetByIdsWhichField，GetBySkipTake，GetByPage
+      GetByWhere，GetByWhereFirst，GetCount，GetByIdsWhichField，GetBySkipTake，GetByPage......
       
       //Transaction
       
