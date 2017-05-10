@@ -72,8 +72,7 @@ It is an simple orm,an it is easy to use,it supports mysql,sqlserver,sqlite
       InsertMany，InsertKeyIfExistUpdate，InsertIdentity，Update，UpdateByWhere，DeleteByIds，DeleteAll，GetAll
       GetByWhere，GetByWhereFirst，GetCount，GetByIdsWhichField，GetBySkipTake，GetByPage......
       
-      //Transaction
-      
+      //Transaction (事物)
       conn.BeginTran()
       try
       {
@@ -85,6 +84,10 @@ It is an simple orm,an it is easy to use,it supports mysql,sqlserver,sqlite
       {
           conn.RollBackTran(); //if error rollback
       }
+      
+      //StoredProcedure (存储过程)
+      conn.commandType = CommandType.StoredProcedure;
+      var data = conn.Query("ProduceName");
       
   }
 
