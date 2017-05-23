@@ -240,7 +240,7 @@ namespace MyConnections.Connection
                 return Query<T>(sqls.GetAllSql + " " + orderBy);
             else
             {
-                string sql = string.Format("SELECT {0} FROM [{1}] " + orderBy, returnFields, sqls.TableName);
+                string sql = string.Format("SELECT {0} FROM `{1}` " + orderBy, returnFields, sqls.TableName);
                 return Query<T>(sql);
             }
         }
