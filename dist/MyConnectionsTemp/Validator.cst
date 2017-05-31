@@ -1,0 +1,56 @@
+﻿<%@ CodeTemplate Language="C#" TargetLanguage="C#" Src="ToolsCodeTemplate.cs" Inherits="ToolsCodeTemplate" %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Property Name="Table" Type="SchemaExplorer.TableSchema" Category="DB" %>
+<%@ Property Name="NameSpaceModel" Type="System.String" Category="String" Default="MyWeb" %>
+<script runat="template">
+    public override string GetFileName()
+    {
+    	return Table.Name + "Validator.cs";
+    }
+</script>
+using System;
+using FluentValidation;
+
+namespace <%=NameSpaceModel %>
+{
+
+    <%PrintHeader("模板生成属性，对应["+Table.Name+"]表字段。此类用于用户提交数据后端验证"); %>
+
+    /// <summary>
+    /// <%=Table.Description %>
+    /// </summary>
+    public class <%=Table.Name + "String" %>
+    {
+        <%foreach(var column in Table.Columns) {%>
+        /// <summary>
+        /// 字段描述:<%=column.Description %>
+        /// 数据类型:<%=GetSqlDbType(column) %>
+        /// 数据长度:<%=column.Size %>
+        /// 允许空值:<%=column.AllowDBNull %>
+        /// </summary>
+        public string <%=column.Name %> { get; set; }
+        
+        <%}%>        
+    }
+    
+    public class <%=Table.Name%>Validator : AbstractValidator<<%=Table.Name + "String" %>>
+    {
+        public <%=Table.Name%>Validator()
+        {
+            //RuleFor(m => m.name).NotEmpty().WithMessage("不能为空");
+            //RuleFor(m => m.name).Matches("正则表达式");
+            //RuleFor(m => m.name).Must(MyMethod);
+        }
+        
+        //private bool MyMethod(string name) //自定义验证方法
+        //{
+        //    if (name == "")
+        //        return false;
+        //    return true;
+            
+        //}
+    }
+}

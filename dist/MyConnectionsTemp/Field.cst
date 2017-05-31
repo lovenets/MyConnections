@@ -1,0 +1,24 @@
+﻿<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<%@ CodeTemplate Language="C#" TargetLanguage="C#" Src="ToolsCodeTemplate.cs" Inherits="ToolsCodeTemplate" %>
+<%@ Property Name="Table" Type="SchemaExplorer.TableSchema" Category="DB" %>
+<script runat="template">
+    public override string GetFileName()
+    {
+    	return Table.Name + ".txt";
+    }
+    public string Fields;
+    public string FieldEq;
+</script>
+<%foreach(var column in Table.Columns) {%>
+<% Fields+=column.Name+","; %>
+<% FieldEq+=(column.Name+"=@"+column.Name+","); %>
+<%} %>
+
+
+<%=Fields.Substring(0,Fields.Length-1) %>
+
+
+<%=FieldEq.Substring(0,FieldEq.Length-1) %>

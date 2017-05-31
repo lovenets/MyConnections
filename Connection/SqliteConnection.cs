@@ -320,7 +320,7 @@ namespace MyConnections.Connection
             return Query<T>(sql, dpar);
         }
 
-        public override IEnumerable<T> GetBySkipTake<T>(int skip, int take, string where = null, string param = null, string returnFields = null, string orderBy = null)
+        public override IEnumerable<T> GetBySkipTake<T>(int skip, int take, string where = null, object param = null, string returnFields = null, string orderBy = null)
         {
             DapperSqls sqls = GetDapperSqls(typeof(T));
             if (returnFields == null)
@@ -343,7 +343,7 @@ namespace MyConnections.Connection
             return Query<T>(sql, param);
         }
 
-        public override IEnumerable<T> GetByPageIndex<T>(int pageIndex, int pageSize, string where = null, string param = null, string returnFields = null, string orderBy = null)
+        public override IEnumerable<T> GetByPageIndex<T>(int pageIndex, int pageSize, string where = null, object param = null, string returnFields = null, string orderBy = null)
         {
             int skip = 0;
             if (pageIndex > 0)
@@ -353,7 +353,7 @@ namespace MyConnections.Connection
             return GetBySkipTake<T>(skip, pageIndex, where, param, returnFields, orderBy);
         }
 
-        public override IEnumerable<T> GetByPage<T>(int pageIndex, int pageSize, out int total, string where = null, string param = null, string returnFields = null, string orderBy = null)
+        public override IEnumerable<T> GetByPage<T>(int pageIndex, int pageSize, out int total, string where = null, object param = null, string returnFields = null, string orderBy = null)
         {
             DapperSqls sqls = GetDapperSqls(typeof(T));
             if (returnFields == null)

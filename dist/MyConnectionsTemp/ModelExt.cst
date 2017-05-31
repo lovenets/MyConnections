@@ -1,0 +1,29 @@
+﻿<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<%@ CodeTemplate Language="C#" TargetLanguage="C#" Src="ToolsCodeTemplate.cs" Inherits="ToolsCodeTemplate" %>
+<%@ Property Name="Table" Type="SchemaExplorer.TableSchema" Category="DB" %>
+<%@ Property Name="NameSpaceModel" Type="System.String" Default="Model" Category="String" %>
+<%@ Property Name="ExtensionModelName" Type="System.String" Default="T"  Category="String" %>
+<script runat="template">
+    public override string GetFileName()
+    {
+    	return Table.Name + ExtensionModelName + "Ext.cs";
+    }
+</script>
+using System;
+using MyConnections;
+
+namespace <%=NameSpaceModel %>
+{
+    <%PrintHeader("此类为表["+Table.Name+"]的拓展字段，即非数据字段，用于关联表字段查询等，请用[Igore]标注属性"); %>
+    
+    /// <summary>
+    /// <%=Table.Description %>
+    /// </summary>
+    public partial class <%=Table.Name + ExtensionModelName %>
+    {
+      
+    }
+}

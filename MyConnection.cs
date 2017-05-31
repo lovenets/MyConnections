@@ -476,7 +476,7 @@ namespace MyConnections
         /// <param name="param"></param>
         /// <param name="returnFields"></param>
         /// <returns></returns>
-        public abstract IEnumerable<T> GetBySkipTake<T>(int skip, int take, string where = null, string param = null, string returnFields = null, string orderBy = null);
+        public abstract IEnumerable<T> GetBySkipTake<T>(int skip, int take, string where = null, object param = null, string returnFields = null, string orderBy = null);
 
         /// <summary>
         /// GetByPageIndex
@@ -489,7 +489,7 @@ namespace MyConnections
         /// <param name="returnFields"></param>
         /// <param name="orderBy"></param>
         /// <returns></returns>
-        public abstract IEnumerable<T> GetByPageIndex<T>(int pageIndex, int pageSize, string where = null, string param = null, string returnFields = null, string orderBy = null);
+        public abstract IEnumerable<T> GetByPageIndex<T>(int pageIndex, int pageSize, string where = null, object param = null, string returnFields = null, string orderBy = null);
 
         /// <summary>
         /// GetByPage
@@ -503,7 +503,7 @@ namespace MyConnections
         /// <param name="returnFields"></param>
         /// <param name="orderBy"></param>
         /// <returns></returns>
-        public abstract IEnumerable<T> GetByPage<T>(int pageIndex, int pageSize, out int total, string where = null, string param = null, string returnFields = null, string orderBy = null);
+        public abstract IEnumerable<T> GetByPage<T>(int pageIndex, int pageSize, out int total, string where = null, object param = null, string returnFields = null, string orderBy = null);
 
         /// <summary>
         /// Get the empty table,but it contain columns

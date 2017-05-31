@@ -1,0 +1,50 @@
+﻿<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<%@ CodeTemplate Language="C#" TargetLanguage="C#" Src="ToolsCodeTemplate.cs" Inherits="ToolsCodeTemplate" %>
+<%@ Property Name="Table" Type="SchemaExplorer.TableSchema" Category="DB" %>
+<%@ Property Name="NameSpaceModel" Type="System.String" Default="Model" Category="String" %>
+<%@ Property Name="NameSpaceDAL" Type="System.String" Default="DAL" Category="String" %>
+<%@ Property Name="ExtensionDALName" Type="System.String" Category="String" Default="D" %>
+<script runat="template">
+    public override string GetFileName()
+    {
+    	return Table.Name + ExtensionDALName + ".cs";
+    }
+</script>
+<% 
+    string className = Table.Name + ExtensionDALName;
+%>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using System.Data;
+using MyConnections;
+<%if(!string.IsNullOrEmpty(NameSpaceModel)){%>
+using <%=NameSpaceModel%>;
+<%}%>
+
+
+namespace <%=NameSpaceDAL %>
+{
+    <%PrintHeader("模板生成，对应["+Table.Name+"]表,请在此类编写数据库访问代码。"); %>
+    
+    /// <summary>
+    /// 表名:<%=Table.Name %>
+    /// 描述:<%=Table.Description %>
+    /// 主键和自增:<%if(!Table.HasPrimaryKey) {%>无主键<%} %> <%if(!HasIdentity(Table)) {%>无自增字段<%} %>
+    /// </summary>
+    public class <%=className %>
+    {
+        private MyConnection conn;
+        
+        public <%=className %>(MyConnection _conn)
+        {
+            this.conn = _conn;
+        }
+        
+    }
+}

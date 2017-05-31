@@ -1,0 +1,45 @@
+﻿<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<%@ CodeTemplate Language="C#" TargetLanguage="C#" Src="ToolsCodeTemplate.cs" Inherits="ToolsCodeTemplate" %>
+<%@ Property Name="Table" Type="SchemaExplorer.TableSchema" Category="DB" %>
+<%@ Property Name="NameSpaceModel" Type="System.String" Default="Model" Category="String" %>
+<%@ Property Name="ExtensionModelName" Type="System.String" Default="T"  Category="String" %>
+<script runat="template">
+    public override string GetFileName()
+    {
+    	return Table.Name + ExtensionModelName + ".cs";
+    }
+</script>
+using System;
+using MyConnections;
+
+namespace <%=NameSpaceModel %>
+{
+    <%PrintHeader("模板生成属性，对应["+Table.Name+"]表字段。"); %>
+    
+    /// <summary>
+    /// <%=Table.Description %>
+    /// </summary>
+    <%if(GetPKName(Table)==null){%>
+    [Table(TableName = "<%=Table.Name %>", KeyName = "<%=GetPKName(Table)%>", IsIdentity = false)]
+    <%}else if(HasIdentity(Table)){%>
+    [Table(TableName = "<%=Table.Name %>", KeyName = "<%=GetPKName(Table)%>", IsIdentity = true)]
+    <%}else if(HasIdentity(Table)==false){%>
+    [Table(TableName = "<%=Table.Name %>", KeyName = "<%=GetPKName(Table)%>", IsIdentity = false)]
+    <%}%>
+    public partial class <%=Table.Name + ExtensionModelName %>
+    {
+        <%foreach(var column in Table.Columns) {%>
+        /// <summary>
+        /// 字段描述:<%=column.Description %>
+        /// 数据类型:<%=GetSqlDbType(column) %>
+        /// 数据长度:<%=column.Size %>
+        /// 允许空值:<%=column.AllowDBNull %>
+        /// </summary>
+        public <%=GetCsharpType(column) %> <%=column.Name %> { get; set; }
+        
+        <%}%>        
+    }
+}
