@@ -292,6 +292,24 @@ namespace MyConnections
         public abstract int InsertKeyManyIfExistUpdate<T>(IEnumerable<T> models, string updateFields = null, bool allowUpdate = true);
 
         /// <summary>
+        /// Insert if key exist will be update
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="model"></param>
+        /// <param name="updateFields">null will be update all fields</param>
+        /// <returns></returns>
+        public abstract int InsertIfExistUpdate<T>(T model, string updateFields = null, bool allowUpdate = true);
+
+        /// <summary>
+        /// InsertMany if key exist will be update
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="models"></param>
+        /// <param name="updateFields">null will be update all fields</param>
+        /// <returns></returns>
+        public abstract int InsertManyIfExistUpdate<T>(IEnumerable<T> models, string updateFields = null, bool allowUpdate = true);
+
+        /// <summary>
         /// InsertIdentity
         /// </summary>
         /// <typeparam name="T"></typeparam>

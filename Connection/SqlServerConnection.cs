@@ -121,8 +121,42 @@ namespace MyConnections.Connection
             int result = 0;
             foreach (var item in models)
             {
-                var result1 = InsertKeyIfExistUpdate(item, updateFields, allowUpdate);
-                result = result + result1;
+                result += InsertKeyIfExistUpdate(item, updateFields, allowUpdate);
+            }
+            return result;
+        }
+
+        public override int InsertIfExistUpdate<T>(T model, string updateFields = null, bool allowUpdate = true)
+        {
+            DapperSqls sqls = GetDapperSqls(typeof(T));
+            if (string.IsNullOrEmpty(sqls.KeyName))
+                throw new Exception("表[" + sqls.TableName + "]没有主键");
+
+            string sqlTotal = string.Format("SELECT COUNT(1) FROM [{0}] WHERE [{1}]=@{1}", sqls.TableName, sqls.KeyName);
+            int total = ExecuteScalar<int>(sqlTotal, model);
+            if (total > 0) //Exists
+            {
+                if (allowUpdate)
+                {
+                    if (string.IsNullOrEmpty(updateFields))
+                        return Update(model);
+                    else
+                        return Update(model, updateFields);
+                }
+                return 0;
+            }
+            else
+            {
+                return Insert(model);
+            }
+        }
+
+        public override int InsertManyIfExistUpdate<T>(IEnumerable<T> models, string updateFields = null, bool allowUpdate = true)
+        {
+            int result = 0;
+            foreach (var item in models)
+            {
+                result += InsertIfExistUpdate(item, updateFields, allowUpdate);
             }
             return result;
         }
@@ -441,5 +475,7 @@ namespace MyConnections.Connection
             string sql = string.Format("SELECT TOP (0) {0} FROM [{1}] WITH(NOLOCK)", returnFields, sqls.TableName);
             return QueryDataTable(sql);
         }
+
+
     }
 }
