@@ -49,14 +49,14 @@ using(var conn = GetMyConn())
     p.Time = DateTime.Now;
 
     int result = conn.Insert(p); //insert
-    int identityId = conn.GetIdentity&lt;int&gt;();
+    int identityId = conn.GetIdentity<int>();
 
     p.Id =1;
     conn.Update(p) //update ... where Id=@id
 
-    conn.Delete&lt;peopleT&gt;(1) //delete by id
+    conn.Delete<peopleT>(1) //delete by id
 
-    peopleT p = conn.GetById&lt;peopleT&gt;(1); //get by id
+    peopleT p = conn.GetById<peopleT>(1); //get by id
 
     //More Method
     InsertMany，InsertKeyIfExistUpdate，InsertIdentity，Update，UpdateByWhere，DeleteByIds，DeleteAll，GetAll
