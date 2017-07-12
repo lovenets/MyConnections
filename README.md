@@ -3,7 +3,7 @@ This  project base on Dapper https://github.com/StackExchange/Dapper.
 It is an simple orm,an it is easy to use,it supports mysql,sqlserver,sqlite
 
 1、Create an MyConnection
-<pre>
+```c#
 
   //IDbConnection
   public static IDbConnection MySqlConn()
@@ -26,7 +26,7 @@ It is an simple orm,an it is easy to use,it supports mysql,sqlserver,sqlite
       //return MyConnection.CreateSqliteConn(IDbConnection...); //sqlite
   }
 
-</pre>
+```
 
 2、Create an Model
 <pre>
