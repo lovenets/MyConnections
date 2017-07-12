@@ -4,7 +4,6 @@ It is an simple orm,an it is easy to use,it supports mysql,sqlserver,sqlite
 
 1、Create an MyConnection
 ```c#
-
   //IDbConnection
   public static IDbConnection MySqlConn()
   {
@@ -16,7 +15,6 @@ It is an simple orm,an it is easy to use,it supports mysql,sqlserver,sqlite
       return conn;
   }
   
-  
   public static MyConnection GetMyConn()
   {
       
@@ -25,7 +23,6 @@ It is an simple orm,an it is easy to use,it supports mysql,sqlserver,sqlite
       //return MyConnection.CreateSqlServerConn(IDbConnection...); //sqlserver
       //return MyConnection.CreateSqliteConn(IDbConnection...); //sqlite
   }
-
 ```
 
 2、Create an Model
