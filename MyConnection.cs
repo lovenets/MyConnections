@@ -88,19 +88,41 @@ namespace MyConnections
         }
 
 
+        private bool m_disposed;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!m_disposed)
+            {
+                if (disposing)
+                {
+                    // Release managed resources (释放托管资源)
+                    if (tran != null)
+                        tran.Dispose();
+
+                    if (reader != null)
+                        reader.Close();
+
+                    if (conn != null && conn.State == ConnectionState.Open)
+                        conn.Dispose();
+                }
+
+                // Release unmanaged resources (释放非托管资源)
+                m_disposed = true;
+            }
+        }
+
+        ~MyConnection()
+        {
+            Dispose(false);
+        }
+
         /// <summary>
         /// 释放连接
         /// </summary>
         public void Dispose()
         {
-            if (tran != null)
-                tran.Dispose();
-
-            if (reader != null)
-                reader.Dispose();
-
-            if (conn != null && conn.State == ConnectionState.Open)
-                conn.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>
@@ -197,7 +219,7 @@ namespace MyConnections
         {
             var gridReader = conn.QueryMultiple(sql, param, tran, commandTimeout, commandType);
             if (reader != null)
-                reader.Dispose();
+                reader.Close();
             reader = new MyReader(gridReader);
             return reader;
         }

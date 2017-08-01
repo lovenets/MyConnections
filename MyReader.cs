@@ -6,7 +6,7 @@ namespace MyConnections
     /// <summary>
     /// 多结果集读取器
     /// </summary>
-    public class MyReader : IDisposable
+    public class MyReader
     {
         private Dapper.SqlMapper.GridReader reader;
 
@@ -39,7 +39,7 @@ namespace MyConnections
             return reader.ReadFirstOrDefault<T>();
         }
 
-        public void Dispose()
+        public void Close()
         {
             if (reader != null)
                 reader.Dispose();
