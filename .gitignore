@@ -47,3 +47,4 @@ obj/Release/MyConnections.csprojResolveAssemblyReference.cache
 obj/Release/MyConnections.csproj.FileListAbsolute.txt
 obj/Release/MyConnections.pdb
 obj/Release/MyConnections.dll
+bin/Release/MyConnections.pdb
