@@ -96,17 +96,22 @@ namespace MyConnections
                 if (disposing)
                 {
                     // Release managed resources (释放托管资源)
-                    if (tran != null)
-                        tran.Dispose();
-
-                    if (reader != null)
-                        reader.Close();
-
-                    if (conn != null && conn.State == ConnectionState.Open)
-                        conn.Dispose();
                 }
 
                 // Release unmanaged resources (释放非托管资源)
+                if (tran != null)
+                    tran.Dispose();
+
+                if (reader != null)
+                {
+                    reader.Close();
+                    reader = null;
+                }
+
+                if (conn != null && conn.State == ConnectionState.Open)
+                    conn.Dispose();
+
+                //释放状态改成true
                 m_disposed = true;
             }
         }
