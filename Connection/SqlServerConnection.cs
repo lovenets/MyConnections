@@ -409,7 +409,7 @@ namespace MyConnections.Connection
             {
                 skip = (pageIndex - 1) * pageSize;
             }
-            return GetBySkipTake<T>(skip, pageIndex, where, param, returnFields, orderBy);
+            return GetBySkipTake<T>(skip, pageSize, where, param, returnFields, orderBy);
         }
 
         public override IEnumerable<T> GetByPage<T>(int pageIndex, int pageSize, out int total, string where = null, object param = null, string returnFields = null, string orderBy = null)
